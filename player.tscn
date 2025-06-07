@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://lf33au4rpirb" path="res://assets/sprites/knight_RUN.png" id="3_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hs0m"]
+size = Vector2(14, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lmhl"]
 atlas = ExtResource("3_2hs0m")
@@ -175,6 +176,7 @@ animations = [{
 script = ExtResource("1_hqtel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_2hs0m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

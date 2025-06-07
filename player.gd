@@ -1,11 +1,11 @@
 extends CharacterBody2D
-
 # === CONFIGURAÇÕES DO PERSONAGEM ===
 var gravity: float = 5.0                  # Gravidade aplicada quando no ar
 var move_speed: float = 150.0            # Velocidade de movimento lateral
-var jump_force: float = -200.0           # Força aplicada no pulo
+var jump_force: float = -180.0           # Força aplicada no pulo
 var jump_time_max: float = 0.3           # Duração máxima do pulo "sustentado"
 var jump_timer: float = 0.0              # Temporizador do pulo
+var air_jump_move_speed:float = 120
 
 # === ESTADOS DO PERSONAGEM ===
 var is_jumping: bool = false             # Indica se está em um pulo sustentado
@@ -40,14 +40,15 @@ func _process(delta: float) -> void:
 	# Quando o botão de pulo é solto, encerra o pulo sustentado
 	if Input.is_action_just_released("ui_up"):
 		is_jumping = false
+		
 
 	# === MOVIMENTO LATERAL ===
 	if Input.is_action_pressed("ui_right"):
-		velocity.x = move_speed
+		velocity.x = move_speed if is_on_floor() else air_jump_move_speed
 		$AnimatedSprite2D.flip_h = false  # Vira o sprite para a direita
 
 	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -move_speed
+		velocity.x = -move_speed if is_on_floor() else - (air_jump_move_speed)
 		$AnimatedSprite2D.flip_h = true   # Vira o sprite para a esquerda
 
 	else:
